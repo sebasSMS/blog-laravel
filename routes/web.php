@@ -16,7 +16,9 @@ use App\Http\Controllers\CursoCtr;
 |
 */
 /* Ruta principal */
-Route::get('/',Homecontroller::class);
+Route::get('/',Homecontroller::class)->name('home');
+Route::resource('asignaturas', CursoController::class)->parameters(['asignaturas' => 'curso'])->names('cursos');
+route::view('nosotros', 'nosotros')->name('nosotros');
 
 /* Route::get('cursos',[CursoController::class, 'index'])->name('cursos.index');
 
