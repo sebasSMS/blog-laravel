@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\ContatanosController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeCtr;
-use App\Http\Controllers\Homecontroller; 
+use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\CursoCtr;
+use App\Mail\ContactanosMailable;
+use Doctrine\DBAL\Schema\Index;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +20,16 @@ use App\Http\Controllers\CursoCtr;
 |
 */
 /* Ruta principal */
-Route::get('/',Homecontroller::class)->name('home');
-Route::resource('asignaturas', CursoController::class)->parameters(['asignaturas' => 'curso'])->names('cursos');
+
+Route::get('/', Homecontroller::class)->name('home');
+
+Route::resource('cursos', CursoController::class);
+
 route::view('nosotros', 'nosotros')->name('nosotros');
+
+Route::get('contactanos',[ContatanosController::class,'index'])->name('contactanos.index');
+
+Route::post('contactanos',[ContatanosController::class,'store'])->name('contactanos.store');
 
 /* Route::get('cursos',[CursoController::class, 'index'])->name('cursos.index');
 
